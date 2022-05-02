@@ -112,4 +112,48 @@ router.delete('/posts/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+
+// comment Creation by PATCH
+router.patch('/posts/:id/comments', requireToken, removeBlanks, (req, res, next) => {
+  // req.params.id will be set based on the `:id` in the route
+  Post.findById(req.params.id)
+    .then(post => {
+      post.comments.push({
+        comment: req.body.post.comment
+      })
+      return post.save()
+    })
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
+// comment Delete by PATCH
+router.patch('/posts/:id/commentdelete', requireToken, removeBlanks, (req, res, next) => {
+  // req.params.id will be set based on the `:id` in the route
+  Post.findById(req.params.id)
+    .then(post => {
+      post.comments.id(req.body.post.commentId).remove()
+      return post.save()
+    })
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
+// comment Update by PATCH
+router.patch('/posts/:id/commentupdate', requireToken, removeBlanks, (req, res, next) => {
+  // req.params.id will be set based on the `:id` in the route
+  Post.findById(req.params.id)
+    .then(post => {
+      let newComment = post.comments.id(req.body.post.commentId)
+      console.log(newComment)
+      newComment.comment = req.body.post.newComment
+      return post.save()
+    })
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
 module.exports = router

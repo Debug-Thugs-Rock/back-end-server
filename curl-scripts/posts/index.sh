@@ -2,7 +2,7 @@
 
 API="http://localhost:4741"
 URL_PATH="/posts"
-TOKEN="51f0152e48ca2cd88528117399bb1f1f"
+TOKEN="079a4f1bacba6bd6ef9a036e873b46aa"
 
 curl "${API}${URL_PATH}" \
   --include \
