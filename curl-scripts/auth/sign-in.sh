@@ -2,6 +2,8 @@
 
 API="http://localhost:4741"
 URL_PATH="/sign-in"
+EMAIL="able@gmail.com"
+PASSWORD=" "
 
 curl "${API}${URL_PATH}" \
   --include \
