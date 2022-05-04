@@ -2,7 +2,7 @@
 
 API="http://localhost:4741"
 URL_PATH="/users-list"
-Token="636fb170f409c6789c905b0a183ad43f"
+TOKEN="d0074b45018e35e387855fac8b99e077"
 
 curl "${API}${URL_PATH}" \
   --include \
