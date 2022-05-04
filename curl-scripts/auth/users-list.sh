@@ -1,8 +1,8 @@
 #!/bin/sh
 
 API="http://localhost:4741"
-URL_PATH="/posts"
-TOKEN="60ce48ba448906195895e172530f657b"
+URL_PATH="/users-list"
+Token="636fb170f409c6789c905b0a183ad43f"
 
 curl "${API}${URL_PATH}" \
   --include \
