@@ -31,6 +31,7 @@ const router = express.Router()
 // GET /posts
 router.get('/posts', requireToken, (req, res, next) => {
   Post.find()
+    .populate('owner')
     .then(posts => {
       // `posts` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -111,7 +112,6 @@ router.delete('/posts/:id', requireToken, (req, res, next) => {
     // if an error occurs, pass it to the handler
     .catch(next)
 })
-
 
 // comment Creation by PATCH
 router.patch('/posts/:id/comments', requireToken, removeBlanks, (req, res, next) => {
