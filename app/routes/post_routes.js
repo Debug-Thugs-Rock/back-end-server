@@ -156,4 +156,21 @@ router.patch('/posts/:id/commentupdate', requireToken, removeBlanks, (req, res, 
     .catch(next)
 })
 
+// UPDATE LIKES
+// PATCH /posts/5a7db6c74d55bc51bdf39793
+router.patch('/posts/:id/likes', requireToken, removeBlanks, (req, res, next) => {
+
+  Post.findById(req.params.id)
+    .then(handle404)
+    .then(post => {
+
+      // pass the result of Mongoose's `.update` to the next `.then`
+      return post.updateOne(req.body.post)
+    })
+    // if that succeeded, return 204 and no JSON
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
 module.exports = router
