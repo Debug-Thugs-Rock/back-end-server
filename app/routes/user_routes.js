@@ -45,6 +45,7 @@ router.post('/sign-up', (req, res, next) => {
       // return necessary params to create a user
       return {
         email: req.body.credentials.email,
+        username: req.body.credentials.username,
         hashedPassword: hash
       }
     })
@@ -64,7 +65,7 @@ router.post('/sign-in', (req, res, next) => {
   let user
 
   // find a user based on the email that was passed
-  User.findOne({ email: req.body.credentials.email })
+  User.findOne({ username: req.body.credentials.username })
     .then(record => {
       // if we didn't find a user with that email, send 401
       if (!record) {
@@ -135,6 +136,15 @@ router.delete('/sign-out', requireToken, (req, res, next) => {
   // save the token and respond with 204
   req.user.save()
     .then(() => res.sendStatus(204))
+    .catch(next)
+})
+
+router.get('/users-list', requireToken, (req, res, next) => {
+  User.find()
+    .then(users => {
+      return users.map(user => user.toObject())
+    })
+    .then(users => res.status(200).json({users}))
     .catch(next)
 })
 

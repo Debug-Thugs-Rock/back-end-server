@@ -3,6 +3,9 @@
 API="http://localhost:4741"
 URL_PATH="/sign-up"
 
+EMAIL="able@gmail.com"
+PASSWORD=" "
+
 curl "${API}${URL_PATH}" \
   --include \
   --request POST \
@@ -10,6 +13,7 @@ curl "${API}${URL_PATH}" \
   --data '{
     "credentials": {
       "email": "'"${EMAIL}"'",
+      "username": "'"${USERNAME}"'",
       "password": "'"${PASSWORD}"'",
       "password_confirmation": "'"${PASSWORD}"'"
     }
