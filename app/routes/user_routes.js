@@ -139,4 +139,13 @@ router.delete('/sign-out', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+router.get('/users-list', requireToken, (req, res, next) => {
+  User.find()
+    .then(users => {
+      return users.map(user => user.toObject())
+    })
+    .then(users => res.status(200).json({users}))
+    .catch(next)
+})
+
 module.exports = router
